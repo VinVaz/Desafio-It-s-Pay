@@ -61,4 +61,11 @@ public class Card {
     this.codigoSeguranca = codigoSeguranca;
   }
 
+  public String ultimosQuatroDigitos() {
+    if (numero.length() <= 4) {
+      return numero;
+    }
+    return numero.substring(numero.length() - 4);
+  }
+
 }
