@@ -77,4 +77,10 @@ public class Card {
     endOfMonthDay = dataValidade.atEndOfMonth();
     return !today.isAfter(endOfMonthDay);
   }
+
+  @Override
+  public String toString() {
+    return "DADOS DESTE CARTÃO - TITULAR=" + nomeUsuario + ", NÚMERO=XXXX-XXXX-XXXX-" + ultimosQuatroDigitos()
+        + ", VÁLIDO ATÉ=" + dataValidade + ", CVV=XXX";
+  }
 }
