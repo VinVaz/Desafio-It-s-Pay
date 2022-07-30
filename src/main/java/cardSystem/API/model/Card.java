@@ -24,4 +24,28 @@ public class Card {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dataValidadeFormato);
     this.dataValidade = YearMonth.parse(dataValidadeInput, formatter);
   }
+
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
+
+  public String getNomeUsuario() {
+    return nomeUsuario;
+  }
+
+  public void setNomeUsuario(String nomeUsuario) {
+    this.nomeUsuario = nomeUsuario;
+  }
+
+  public String getCodigoSeguranca() {
+    return codigoSeguranca;
+  }
+
+  public void setCodigoSeguranca(String codigoSeguranca) {
+    this.codigoSeguranca = codigoSeguranca;
+  }
 }

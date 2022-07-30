@@ -37,8 +37,20 @@ public class CardService {
     String numero = (String) jsonCard.get("numero");
     String nomeUsuario = (String) jsonCard.get("nomeUsuario");
     String codigoSeguranca = (String) jsonCard.get("codigoSeguranca");
-
     String dataValidade = (String) jsonCard.get("dataValidade");
 
+    if ((numero != null) && (nomeUsuario != null) && (codigoSeguranca != null) && (dataValidade != null)) {
+      card.setNumero(numero);
+      card.setNomeUsuario(nomeUsuario);
+      card.setCodigoSeguranca(codigoSeguranca);
+      card.setDataValidade(dataValidade)
+    }
+  }
+
+  public Card create(JSONObject jsonCard) {
+    Card card = new Card();
+    fillCardValues(jsonCard, card);
+
+    return card;
   }
 }
