@@ -12,7 +12,11 @@ public class Card {
   private YearMonth dataValidade;
   private String dataValidadeFormato = "mm/yyyy";
 
-  public Card() {
+  public Card(String numero, String nomeUsuario, String codigoSeguranca, YearMonth dataValidade) {
+    this.numero = numero;
+    this.nomeUsuario = nomeUsuario;
+    this.codigoSeguranca = codigoSeguranca;
+    this.dataValidade = dataValidade;
   }
 
   public String getDataValidade() {
@@ -24,4 +28,37 @@ public class Card {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dataValidadeFormato);
     this.dataValidade = YearMonth.parse(dataValidadeInput, formatter);
   }
+
+  public Long getId() {
+    return id;
+  }
+
+  public String getDataValidadeFormato() {
+    return dataValidadeFormato;
+  }
+
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
+
+  public String getNomeUsuario() {
+    return nomeUsuario;
+  }
+
+  public void setNomeUsuario(String nomeUsuario) {
+    this.nomeUsuario = nomeUsuario;
+  }
+
+  public String getCodigoSeguranca() {
+    return codigoSeguranca;
+  }
+
+  public void setCodigoSeguranca(String codigoSeguranca) {
+    this.codigoSeguranca = codigoSeguranca;
+  }
+
 }
