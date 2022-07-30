@@ -1,5 +1,6 @@
 package cardSystem.API.model;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
@@ -62,10 +63,18 @@ public class Card {
   }
 
   public String ultimosQuatroDigitos() {
-    if (numero.length() <= 4) {
+    final Integer LastDigitsLenght = 4;
+    if (numero.length() <= LastDigitsLenght) {
       return numero;
     }
-    return numero.substring(numero.length() - 4);
+    return numero.substring(numero.length() - LastDigitsLenght);
   }
 
+  public Boolean isValid() {
+    LocalDate today = LocalDate.now();
+    LocalDate endOfMonthDay = null;
+
+    endOfMonthDay = dataValidade.atEndOfMonth();
+    return !today.isAfter(endOfMonthDay);
+  }
 }
