@@ -33,24 +33,13 @@ public class CardService {
     return Long.valueOf((int) card.get("id"));
   }
 
-  private void fillCardValues(JSONObject jsonCard, Card card) {
+  public Card create(JSONObject jsonCard) {
     String numero = (String) jsonCard.get("numero");
     String nomeUsuario = (String) jsonCard.get("nomeUsuario");
     String codigoSeguranca = (String) jsonCard.get("codigoSeguranca");
     String dataValidade = (String) jsonCard.get("dataValidade");
 
-    if ((numero != null) && (nomeUsuario != null) && (codigoSeguranca != null) && (dataValidade != null)) {
-      card.setNumero(numero);
-      card.setNomeUsuario(nomeUsuario);
-      card.setCodigoSeguranca(codigoSeguranca);
-      card.setDataValidade(dataValidade)
-    }
-  }
-
-  public Card create(JSONObject jsonCard) {
     Card card = new Card();
-    fillCardValues(jsonCard, card);
-
     return card;
   }
 }
