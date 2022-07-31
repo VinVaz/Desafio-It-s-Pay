@@ -43,17 +43,17 @@ public class CardController {
 	}
 
 	@RequestMapping(value = "/cartoes/{id}", consumes = "application/json", produces = "application/json", method = RequestMethod.PUT)
-	public ResponseEntity<Card> updateCard(@RequestBody Card emp, @PathVariable("id") Integer id) {
+	public ResponseEntity<Object> updateCard(@RequestBody Card card, @PathVariable("id") Long id) {
 
-		return new ResponseEntity<>(cardService.updateCard(emp, id), HttpStatus.OK);
+		return new ResponseEntity<Object>("Produto alterado com sucesso!", HttpStatus.NO_CONTENT);
 	}
 
 	@RequestMapping(value = "/cartoes/{id}", consumes = "text/plain", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteCard(@PathVariable("id") Integer id) {
+	public ResponseEntity<Object> deleteCard(@PathVariable("id") Integer id) {
 
 		cardService.deleteCard(id);
 
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Object>("Produto deletado com sucesso!", HttpStatus.NO_CONTENT);
 	}
 
 }
