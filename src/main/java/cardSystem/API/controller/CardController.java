@@ -31,7 +31,7 @@ public class CardController {
 
 	@RequestMapping(value = "/cartoes/{id}", consumes = "application/json", produces = "application/json", method = RequestMethod.GET)
 	@CrossOrigin
-	public ResponseEntity<Card> getCard(@PathVariable("id") Integer id) {
+	public ResponseEntity<Card> getCard(@PathVariable("id") Long id) {
 
 		return new ResponseEntity<>(cardService.getCard(id), HttpStatus.FOUND);
 	}
@@ -49,7 +49,7 @@ public class CardController {
 	}
 
 	@RequestMapping(value = "/cartoes/{id}", consumes = "text/plain", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteCard(@PathVariable("id") Integer id) {
+	public ResponseEntity<Object> deleteCard(@PathVariable("id") Long id) {
 
 		cardService.deleteCard(id);
 
