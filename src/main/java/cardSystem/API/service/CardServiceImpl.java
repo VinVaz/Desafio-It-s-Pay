@@ -18,13 +18,14 @@ public class CardServiceImpl implements CardService {
 
   @Override
   public Card createCard(Card card) {
-    Card newCard = new Card(card.getNumero(), card.getNomeUsuario(), card.getCodigoSeguranca(), card.getDataValidade());
-    return cardRepository.save(newCard);
+    Card newCard = cardRepository
+        .save(new Card(card.getNumero(), card.getNomeUsuario(), card.getCodigoSeguranca(),
+            card.getDataValidade()));
+    return newCard;
   }
 
   @Override
   public Card getCard(long id) {
-
     Optional<Card> card = cardRepository.findById(id);
     if (!card.isPresent()) {
       throw new CardNotExistsException("Cartão de ID " + id + "não existe no sistema");
@@ -34,22 +35,20 @@ public class CardServiceImpl implements CardService {
 
   @Override
   public List<Card> getAllCards() {
+
     List<Card> listCard = cardRepository.findAll();
     if (listCard.isEmpty()) {
       throw new CardNotExistsException("Nenhum cartão salvo no sistema");
     }
+
     return listCard;
   }
 
   @Override
   public Card updateCard(Card card, long id) {
 
-    Optional<Card> cardData = cardRepository.findById(id);
-    if (!cardData.isPresent()) {
-      throw new CardNotExistsException("Cartão de ID " + id + "não existe no sistema");
-    }
+    Card _card = getCard(id);
 
-    Card _card = cardData.get();
     _card.setNumero(card.getNumero());
     _card.setNomeUsuario(card.getNomeUsuario());
     _card.setCodigoSeguranca(card.getCodigoSeguranca());
@@ -60,13 +59,10 @@ public class CardServiceImpl implements CardService {
 
   @Override
   public void deleteCard(long id) {
-
-    if (getCard(id) != null) {
+    Card cardData = getCard(id);
+    if (cardData != null) {
       throw new CardNotExistsException("Cartão de ID " + id + " não existe no sistema");
     }
-
     cardRepository.deleteById(id);
-
   }
-
 }

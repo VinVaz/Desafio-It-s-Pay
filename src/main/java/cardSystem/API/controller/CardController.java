@@ -25,16 +25,15 @@ import cardSystem.API.model.Card;
 import cardSystem.API.service.CardService;
 
 @RestController
-@RequestMapping(value = "/cartoes")
 public class CardController {
 	private static final Logger logger = LoggerFactory.getLogger(CardController.class);
 
 	@Autowired
 	private CardService cardService;
 
-	@PostMapping
+	@PostMapping("/cartoes")
 	public ResponseEntity<Card> saveCard(@RequestBody Card card) {
-		System.out.println(card);
+
 		try {
 			Card _card = cardService.createCard(card);
 			return new ResponseEntity<>(_card, HttpStatus.CREATED);
@@ -43,10 +42,9 @@ public class CardController {
 		}
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/cartoes/{id}")
 	@CrossOrigin
 	public ResponseEntity<Card> getCard(@PathVariable("id") Long id) {
-		System.out.println(id);
 		try {
 			Card _card = cardService.getCard(id);
 			return new ResponseEntity<>(_card, HttpStatus.FOUND);
@@ -55,9 +53,8 @@ public class CardController {
 		}
 	}
 
-	@GetMapping
+	@GetMapping("/cartoes")
 	public ResponseEntity<List<Card>> getAllCards() {
-		System.out.println("worked");
 		try {
 			List<Card> cards = cardService.getAllCards();
 			return new ResponseEntity<>(cards, HttpStatus.OK);
@@ -66,9 +63,8 @@ public class CardController {
 		}
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/cartoes/{id}")
 	public ResponseEntity<String> updateCard(@RequestBody Card card, @PathVariable("id") Long id) {
-		System.out.println(card);
 		try {
 			cardService.updateCard(card, id);
 			return new ResponseEntity<>("Produto alterado com sucesso!", HttpStatus.NO_CONTENT);
@@ -77,9 +73,8 @@ public class CardController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/cartoes/{id}")
 	public ResponseEntity<String> deleteCard(@PathVariable("id") Long id) {
-		System.out.println(id);
 		try {
 			cardService.deleteCard(id);
 			return new ResponseEntity<>("Produto deletado com sucesso!", HttpStatus.NO_CONTENT);
