@@ -74,10 +74,12 @@ public class CardController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("message", "Produto alterado com sucesso!");
 		map.put("status", HttpStatus.NO_CONTENT.value());
+		Map<String, Object> outerMap = new HashMap<String, Object>();
+		outerMap.put("response", map);
 
 		try {
 			cardService.updateCard(card, id);
-			return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(outerMap, HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
