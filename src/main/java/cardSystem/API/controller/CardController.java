@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,30 +57,45 @@ public class CardController {
 	}
 
 	@GetMapping("/cartoes")
-	public ResponseEntity<List<Card>> getAllCards() {
+	public ResponseEntity<Object> getAllCards() {
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<Card> cards = cardService.getAllCards();
-			return new ResponseEntity<>(cards, HttpStatus.OK);
+			map.put("cartao", cards);
+			return new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PutMapping("/cartoes/{id}")
-	public ResponseEntity<String> updateCard(@RequestBody Card card, @PathVariable("id") Long id) {
+	public ResponseEntity<Object> updateCard(@RequestBody Card card, @PathVariable("id") Long id) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message", "Produto alterado com sucesso!");
+		map.put("status", HttpStatus.NO_CONTENT.value());
+
 		try {
 			cardService.updateCard(card, id);
-			return new ResponseEntity<>("Produto alterado com sucesso!", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(map, HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
 	}
 
 	@DeleteMapping("/cartoes/{id}")
-	public ResponseEntity<String> deleteCard(@PathVariable("id") Long id) {
+	public ResponseEntity<Object> deleteCard(@PathVariable("id") Long id) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("menssagem", "Produto deletado com sucesso!");
+		map.put("status", HttpStatus.NO_CONTENT.value());
+		Map<String, Object> outerMap = new HashMap<String, Object>();
+		outerMap.put("response", map);
+
 		try {
 			cardService.deleteCard(id);
-			return new ResponseEntity<>("Produto deletado com sucesso!", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(outerMap, HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
