@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity(name = "Card")
 public class Card {
 

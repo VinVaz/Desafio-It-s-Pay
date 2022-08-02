@@ -34,7 +34,7 @@ public class CardController {
 	@Autowired
 	private CardService cardService;
 
-	@PostMapping("/cartoes")
+	@PostMapping("/cartões")
 	public ResponseEntity<Card> saveCard(@RequestBody Card card) {
 
 		try {
@@ -45,18 +45,18 @@ public class CardController {
 		}
 	}
 
-	@GetMapping("/cartoes/{id}")
+	@GetMapping("/cartões/{id}")
 	@CrossOrigin
 	public ResponseEntity<Card> getCard(@PathVariable("id") Long id) {
 		try {
 			Card _card = cardService.getCard(id);
-			return new ResponseEntity<>(_card, HttpStatus.FOUND);
+			return new ResponseEntity<>(_card, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	@GetMapping("/cartoes")
+	@GetMapping("/cartões")
 	public ResponseEntity<Object> getAllCards() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -68,7 +68,7 @@ public class CardController {
 		}
 	}
 
-	@PutMapping("/cartoes/{id}")
+	@PutMapping("/cartões/{id}")
 	public ResponseEntity<Object> updateCard(@RequestBody Card card, @PathVariable("id") Long id) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -79,14 +79,14 @@ public class CardController {
 
 		try {
 			cardService.updateCard(card, id);
-			return new ResponseEntity<>(outerMap, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(outerMap, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
 	}
 
-	@DeleteMapping("/cartoes/{id}")
+	@DeleteMapping("/cartões/{id}")
 	public ResponseEntity<Object> deleteCard(@PathVariable("id") Long id) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -97,7 +97,7 @@ public class CardController {
 
 		try {
 			cardService.deleteCard(id);
-			return new ResponseEntity<>(outerMap, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(outerMap, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

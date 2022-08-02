@@ -3,6 +3,8 @@ package cardSystem.API.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.print.event.PrintEvent;
+import static java.lang.System.out;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,9 +62,6 @@ public class CardServiceImpl implements CardService {
   @Override
   public void deleteCard(long id) {
     Card cardData = getCard(id);
-    if (cardData != null) {
-      throw new CardNotExistsException("Cartão de ID " + id + " não existe no sistema");
-    }
-    cardRepository.deleteById(id);
+    cardRepository.deleteById(cardData.getId());
   }
 }
