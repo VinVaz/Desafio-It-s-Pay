@@ -1,1 +1,1 @@
-Projecto para processo seletivo da empresa It's Pay.
+Projeto para processo seletivo da empresa It's Pay.
